@@ -5,6 +5,10 @@ import manifest from "./manifest.json";
 import { version } from "./package.json";
 
 export default defineConfig({
+  build: {
+    polyfillModulePreload: false,
+    target: "esnext",
+  },
   plugins: [
     crx({
       manifest: { ...manifest, version },
