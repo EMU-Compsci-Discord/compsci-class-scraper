@@ -2,6 +2,6 @@
   "manifest_version": 3,
   "name": "CompSci Class Scraper",
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "popup.html"
   }
 }
