@@ -3,5 +3,10 @@
   "name": "CompSci Class Scraper",
   "action": {
     "default_popup": "popup.html"
+  },
+  "permissions": ["scripting", "storage"],
+  "host_permissions": ["https://bannerweb.emich.edu/*"],
+  "background": {
+    "service_worker": "src/background.ts"
   }
 }
