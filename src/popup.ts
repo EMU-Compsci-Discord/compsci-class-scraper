@@ -18,7 +18,9 @@ const tab = await getCurrentTab();
 
 const tabId = tab.id!;
 
-let onTabLoad = () => {};
+let onTabLoad = () => {
+  // do nothing
+};
 chrome.tabs.onUpdated.addListener((eventTabId, info) => {
   if ((eventTabId === tabId && info.status) === "complete") {
     onTabLoad();
@@ -38,25 +40,28 @@ function executeScript(script: BackgroundMessage["script"]) {
 storage.subscribe(async (state) => {
   console.log("new state:", state);
   switch (state) {
-    case "Waiting for user to start":
+    case "Waiting for user to start": {
       // TODO: Button
 
       await chrome.tabs.update(tabId, { url: BANNER_REGISTRATION_URL });
       await waitForTabToLoad();
       storage.update({ step: "Clicking 'Look-up Classes'" });
       break;
+    }
 
-    case "Clicking 'Look-up Classes'":
+    case "Clicking 'Look-up Classes'": {
       await executeScript("clickLookUpClasses");
       await waitForTabToLoad();
       storage.update({ step: "Collecting terms" });
       break;
+    }
 
-    case "Collecting terms":
+    case "Collecting terms": {
       await executeScript("collectTerms");
       break;
+    }
 
-    case "Waiting for user to select term":
+    case "Waiting for user to select term": {
       const state = await storage.get();
       const terms = (state.terms ?? "").split("\n");
 
@@ -64,27 +69,32 @@ storage.subscribe(async (state) => {
 
       storage.update({ step: "[1/3] Selecting term", selectedTerm: terms[1] });
       break;
+    }
 
-    case "[1/3] Selecting term":
+    case "[1/3] Selecting term": {
       await executeScript("selectTerm");
       await waitForTabToLoad();
       storage.update({ step: "[1/3] Clicking 'Advanced Search'" });
       break;
+    }
 
-    case "[1/3] Clicking 'Advanced Search'":
+    case "[1/3] Clicking 'Advanced Search'": {
       await executeScript("clickAdvancedSearch");
       await waitForTabToLoad();
       storage.update({ step: "[2/3] Selecting 'Computer Science'" });
       break;
+    }
 
-    case "[2/3] Selecting 'Computer Science'":
+    case "[2/3] Selecting 'Computer Science'": {
       await executeScript("selectComputerScience");
       await waitForTabToLoad();
       storage.update({ step: "[2/3] Collecting classes" });
       break;
+    }
 
-    default:
+    default: {
       throw new Error("Unknown state");
+    }
   }
 });
 
