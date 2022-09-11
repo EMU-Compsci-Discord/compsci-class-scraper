@@ -40,3 +40,22 @@ export function selectOption(element: HTMLSelectElement, text: string) {
   }
   throw new Error(`Could not find option with text ${text}`);
 }
+
+export function setInputValue(name: string, value: string) {
+  for (const input of document.querySelectorAll("input")) {
+    if (input.name.includes(name)) {
+      input.value = value;
+      return;
+    }
+  }
+  throw new Error(`Could not find input with name ${name}`);
+}
+
+export function findTableByCaption(caption: string): HTMLTableElement {
+  for (const table of document.querySelectorAll("table")) {
+    if (table.caption?.innerText.includes(caption)) {
+      return table;
+    }
+  }
+  throw new Error(`Could not find table with caption ${caption}`);
+}

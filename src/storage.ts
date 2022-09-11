@@ -7,13 +7,15 @@ export const steps = [
   "[1/3] Clicking 'Advanced Search'",
   "[1/3] Selecting 'Computer Science'",
   "[1/3] Collecting classes",
+  "[1/3] Clicking 'New Search'",
   "[2/3] Selecting term",
   "[2/3] Clicking 'Advanced Search'",
-  "[2/3] Selecting 'Computer Science'",
+  "[2/3] Selecting 'Mathematics' 120",
   "[2/3] Collecting classes",
+  "[2/3] Clicking 'New Search'",
   "[3/3] Selecting term",
   "[3/3] Clicking 'Advanced Search'",
-  "[3/3] Selecting 'Computer Science'",
+  "[3/3] Selecting 'Statistics' 360",
   "[3/3] Collecting classes",
   "Done",
   "Error",
@@ -30,20 +32,20 @@ export interface StorageState {
   error?: string;
 }
 
-export async function set(state: StorageState) {
+export async function setStorage(state: StorageState) {
   await chrome.storage.local.clear();
   return await chrome.storage.local.set(state);
 }
 
-export function update(state: Partial<StorageState>) {
+export function updateStorage(state: Partial<StorageState>) {
   return chrome.storage.local.set(state);
 }
 
-export function get() {
+export function getStorage() {
   return chrome.storage.local.get() as Promise<StorageState>;
 }
 
-export function subscribe(callback: (state: Step) => void): () => void {
+export function subscribeToStep(callback: (state: Step) => void): () => void {
   const listener = async (
     changes: {
       [key in keyof StorageState]: { newValue?: StorageState[key] };
@@ -58,4 +60,12 @@ export function subscribe(callback: (state: Step) => void): () => void {
   return () => {
     chrome.storage.onChanged.removeListener(listener as any);
   };
+}
+
+export function nextStep(step: Step): Step {
+  const index = steps.indexOf(step);
+  if (index === -1) {
+    throw new Error("Unknown step");
+  }
+  return steps[index + 1];
 }

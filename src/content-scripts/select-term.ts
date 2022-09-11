@@ -1,5 +1,5 @@
 import { clickButton, findSelect, selectOption } from "./utils";
-import { get as getStorage } from "../storage";
+import { getStorage } from "../storage";
 
 const state = await getStorage();
 

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/EMU-Compsci-Discord/compsci-class-scraper/main/json-schema/output-v1.schema.json",
+  "title": "Compsci Class Scraper Output",
+  "description": "All the classes for a given semester at EMU. Designed to be consumed by CompsciBot.",
+  "type": "object",
+  "properties": {
+    "term": {
+      "description": "The Term e.g. \"Fall 2022\"",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "The time the scraper ran, as the number of milliseconds since 1970",
+      "type": "integer"
+    },
+    "classes": {
+      "description": "All the computer science classes for the given term",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "description": "The subject of the class e.g. \"COSC\"",
+            "type": "string"
+          },
+          "course": {
+            "description": "The course number e.g. \"341W\"",
+            "type": "string"
+          },
+          "days": {
+            "description": "The days of the week the class is held on e.g. \"MW\"",
+            "type": "string"
+          },
+          "time": {
+            "description": "The time of day the class is held e.g. \"09:00 am-10:50 am\"",
+            "type": "string"
+          },
+          "instructor": {
+            "description": "The instructor that is teaching the class e.g. \"Suchindran Maniccam (P)\"",
+            "type": "string"
+          }
+        }
+      },
+      "required": ["subject", "course", "days", "time", "instructor"]
+    }
+  },
+  "required": ["term", "timestamp", "classes"]
+}

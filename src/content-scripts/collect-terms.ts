@@ -1,5 +1,5 @@
 import { enumerateOptions, findSelect } from "./utils";
-import { update as updateStorage } from "../storage";
+import { updateStorage } from "../storage";
 
 const select = findSelect("term");
 
