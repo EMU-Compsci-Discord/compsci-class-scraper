@@ -1,4 +1,4 @@
-import "./popup.css";
+import "./popup-gui";
 import type { BackgroundMessage } from "./background";
 import { getStorage, nextStep, setStorage, subscribeToStep, updateStorage } from "./storage";
 import { $schema, OutputFile, Section } from "./output-file";
@@ -38,12 +38,13 @@ function executeScript(script: BackgroundMessage["script"]) {
   return chrome.runtime.sendMessage(message);
 }
 
+const gui = document.querySelector("popup-gui")!;
+
 subscribeToStep(async (step) => {
-  console.log("new step:", step);
+  gui.step = step;
   switch (step) {
     case "Waiting for user to start": {
-      // TODO: Button
-
+      await gui.waitForStartButton();
       await chrome.tabs.update(tabId, { url: BANNER_REGISTRATION_URL });
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
@@ -66,9 +67,9 @@ subscribeToStep(async (step) => {
       const state = await getStorage();
       const terms = (state.terms ?? "").split("\n");
 
-      // TODO: Select
+      const selectedTerm = await gui.waitForTermSelection(terms);
 
-      updateStorage({ step: nextStep(step), selectedTerm: terms[1] });
+      updateStorage({ step: nextStep(step), selectedTerm });
       break;
     }
 
@@ -134,9 +135,16 @@ subscribeToStep(async (step) => {
         timestamp: new Date().getTime(),
         classes: JSON.parse(state.classes ?? "[]") as Section[],
       };
-      console.log(outputFile);
 
-      // TODO: Save to file
+      gui.onSaveFile = async () => {
+        const fileHandle = await window.showSaveFilePicker({
+          suggestedName: outputFile.term.replaceAll(" ", "-"),
+          types: [{ accept: { "application/json": [".json"] } }],
+        });
+        const writable = await fileHandle.createWritable();
+        await writable.write(JSON.stringify(outputFile, null, 2));
+        await writable.close();
+      };
 
       break;
     }
@@ -145,7 +153,7 @@ subscribeToStep(async (step) => {
       const state = await getStorage();
       console.error(state.error);
 
-      // TODO: display error message
+      gui.error = state.error;
 
       break;
     }

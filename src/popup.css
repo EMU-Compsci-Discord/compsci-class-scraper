@@ -1,3 +1,64 @@
 :root {
   color-scheme: light dark;
+  font-size: 16px;
+}
+
+* {
+  font-family: "system-ui", "Roboto", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+popup-gui {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  padding: 24px;
+  gap: 12px;
+}
+
+h1 {
+  white-space: nowrap;
+  margin: 0;
+}
+
+.status {
+  white-space: nowrap;
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.error {
+  color: red;
+  font-family: ui-monospace, "Cascadia Mono", "Roboto Mono", monospace;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  border: 4px solid currentColor;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+.buttons {
+  display: grid;
+  justify-items: end;
 }
