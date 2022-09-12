@@ -53,7 +53,7 @@ for (const row of rows) {
 
   for (const [key, index] of Object.entries(columnIndexes)) {
     const cell = cells[index];
-    classInfo[key as keyof Section] = cell.textContent?.trim() ?? "";
+    classInfo[key as keyof Section] = cell.textContent?.replaceAll(/\s+/g, " ").trim() ?? "";
   }
 
   if (classInfo.subject === "" || classInfo.course === "") {
