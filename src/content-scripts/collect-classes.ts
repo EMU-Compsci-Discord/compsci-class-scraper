@@ -26,7 +26,7 @@ while (columnIndexes === undefined) {
   };
 
   for (const header of headers) {
-    const text = header.textContent?.trim().toLowerCase() ?? "";
+    const text = header.textContent?.toLowerCase() ?? "";
 
     if (text.includes("subj")) {
       columnIndexes.subject = header.cellIndex;
