@@ -52,14 +52,14 @@ subscribeToStep(async (step) => {
     }
 
     case "Clicking 'Look-up Classes'": {
-      await executeScript("clickLookUpClasses");
+      executeScript("clickLookUpClasses");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
     }
 
     case "Collecting terms": {
-      await executeScript("collectTerms");
+      executeScript("collectTerms");
       break;
     }
 
@@ -76,7 +76,7 @@ subscribeToStep(async (step) => {
     case "[1/3] Selecting term":
     case "[2/3] Selecting term":
     case "[3/3] Selecting term": {
-      await executeScript("selectTerm");
+      executeScript("selectTerm");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
@@ -85,28 +85,28 @@ subscribeToStep(async (step) => {
     case "[1/3] Clicking 'Advanced Search'":
     case "[2/3] Clicking 'Advanced Search'":
     case "[3/3] Clicking 'Advanced Search'": {
-      await executeScript("clickAdvancedSearch");
+      executeScript("clickAdvancedSearch");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
     }
 
     case "[1/3] Selecting 'Computer Science'": {
-      await executeScript("selectComputerScience");
+      executeScript("selectComputerScience");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
     }
 
     case "[2/3] Selecting 'Mathematics' 120": {
-      await executeScript("selectMath120");
+      executeScript("selectMath120");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
     }
 
     case "[3/3] Selecting 'Statistics' 360": {
-      await executeScript("selectStat360");
+      executeScript("selectStat360");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
@@ -115,13 +115,13 @@ subscribeToStep(async (step) => {
     case "[1/3] Collecting classes":
     case "[2/3] Collecting classes":
     case "[3/3] Collecting classes": {
-      await executeScript("collectClasses");
+      executeScript("collectClasses");
       break;
     }
 
     case "[1/3] Clicking 'New Search'":
     case "[2/3] Clicking 'New Search'": {
-      await executeScript("clickNewSearch");
+      executeScript("clickNewSearch");
       await waitForTabToLoad();
       updateStorage({ step: nextStep(step) });
       break;
