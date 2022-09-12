@@ -63,7 +63,7 @@ export class PopupGuiElement extends LitElement {
               ${this.terms.map((term) => html`<option value="${term}">${term}</option>`)}
             </select>`
           : undefined}
-        ${this.error != undefined ? html`<pre class="error">${this.error}</pre>` : undefined}
+        ${this.error != undefined ? html`<p class="error">${this.error}</p>` : undefined}
         ${showSpinner ? html`<div class="spinner"></div>` : undefined}
       </div>
       <div class="buttons">
