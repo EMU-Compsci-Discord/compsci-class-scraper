@@ -1,10 +1,12 @@
 :root {
   color-scheme: light dark;
   font-size: 16px;
+  --emu-green: #056b38;
 }
 
 * {
   font-family: "system-ui", "Roboto", "Segoe UI", Arial, Helvetica, sans-serif;
+  accent-color: var(--emu-green);
 }
 
 body {
@@ -53,7 +55,7 @@ h1 {
   width: 48px;
   height: 48px;
   border-radius: 48px;
-  border: 4px solid currentColor;
+  border: 4px solid var(--emu-green);
   border-top-color: transparent;
   animation: spin 1s linear infinite;
 }
@@ -61,4 +63,19 @@ h1 {
 .buttons {
   display: grid;
   justify-items: end;
+}
+
+button {
+  appearance: none;
+  border: none;
+  background-color: var(--emu-green);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+button:hover,
+button:focus {
+  filter: brightness(1.2);
 }

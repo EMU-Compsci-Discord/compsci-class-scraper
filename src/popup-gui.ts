@@ -74,7 +74,7 @@ export class PopupGuiElement extends LitElement {
           ? html`<button @click="${this.handleNextButtonClick}">Next</button>`
           : undefined}
         ${this.step === "Done" && this.onSaveFile != undefined
-          ? html`<button @click="${this.onSaveFile}">Save file</button>`
+          ? html`<button @click="${this.onSaveFile}">Save File</button>`
           : undefined}
       </div>`;
   }
