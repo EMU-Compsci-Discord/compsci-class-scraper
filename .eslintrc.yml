@@ -13,4 +13,5 @@ plugins:
   - "@typescript-eslint"
 ignorePatterns:
   - dist/
-rules: {}
+rules:
+  "@typescript-eslint/no-non-null-assertion": off
