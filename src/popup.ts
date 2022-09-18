@@ -47,7 +47,12 @@ subscribeToStep(async (step) => {
       await gui.waitForStartButton();
       await chrome.tabs.update(tabId, { url: BANNER_REGISTRATION_URL });
       await waitForTabToLoad();
-      updateStorage({ step: nextStep(step) });
+      const tab = await getCurrentTab();
+      if (new URL(tab.url!).hostname === "netid.emich.edu") {
+        updateStorage({ step: "Error", error: "Not logged in. Please log in and try again." });
+      } else {
+        updateStorage({ step: nextStep(step) });
+      }
       break;
     }
 

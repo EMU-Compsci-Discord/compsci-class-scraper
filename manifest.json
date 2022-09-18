@@ -11,7 +11,7 @@
   "action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["scripting", "storage"],
+  "permissions": ["scripting", "storage", "tabs"],
   "host_permissions": ["https://bannerweb.emich.edu/*"],
   "background": {
     "service_worker": "src/background.ts"
