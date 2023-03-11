@@ -4,7 +4,7 @@ import { getStorage, nextStep, setStorage, subscribeToStep, updateStorage } from
 import { $schema, OutputFile, Section } from "./output-file";
 
 const BANNER_REGISTRATION_URL =
-  "https://bannerweb.emich.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_RegMnu";
+  "https://bannerweb.oci.emich.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_RegMnu";
 
 async function getCurrentTab() {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
