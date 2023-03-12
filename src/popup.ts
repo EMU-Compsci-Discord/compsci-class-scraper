@@ -54,7 +54,7 @@ subscribeToStep(async (step) => {
         if (hostname === "bannerweb.oci.emich.edu") {
           loading = false;
           updateStorage({ step: nextStep(step) });
-        } else if (hostname === "netid.emich.edu") {
+        } else if (hostname === "netid.emich.edu" || hostname === "login.microsoftonline.com") {
           loading = false;
           updateStorage({ step: "Error", error: "Not logged in. Please log in and try again." });
         }
