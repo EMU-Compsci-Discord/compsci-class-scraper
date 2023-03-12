@@ -21,7 +21,7 @@ export const steps = [
   "Error",
 ] as const;
 
-export type Step = typeof steps[number];
+export type Step = (typeof steps)[number];
 
 export interface StorageState {
   step: Step;
