@@ -46,12 +46,18 @@ subscribeToStep(async (step) => {
     case "Waiting for user to start": {
       await gui.waitForStartButton();
       await chrome.tabs.update(tabId, { url: BANNER_REGISTRATION_URL });
-      await waitForTabToLoad();
-      const tab = await getCurrentTab();
-      if (new URL(tab.url!).hostname === "netid.emich.edu") {
-        updateStorage({ step: "Error", error: "Not logged in. Please log in and try again." });
-      } else {
-        updateStorage({ step: nextStep(step) });
+      let loading = true;
+      while (loading) {
+        await waitForTabToLoad();
+        const tab = await getCurrentTab();
+        const hostname = new URL(tab.url!).hostname;
+        if (hostname === "bannerweb.oci.emich.edu") {
+          loading = false;
+          updateStorage({ step: nextStep(step) });
+        } else if (hostname === "netid.emich.edu") {
+          loading = false;
+          updateStorage({ step: "Error", error: "Not logged in. Please log in and try again." });
+        }
       }
       break;
     }
