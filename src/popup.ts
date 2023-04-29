@@ -52,13 +52,19 @@ subscribeToStep(async (step) => {
     case "Navigating to Registration": {
       await chrome.tabs.update(tabId, { url: BANNER_REGISTRATION_URL });
       let loading = true;
+      let loginTimeout = 0;
       while (loading) {
         await waitForTabToLoad();
+        clearTimeout(loginTimeout);
         const tab = await getCurrentTab();
         const hostname = new URL(tab.url!).hostname;
         if (hostname === "bannerweb.oci.emich.edu") {
           loading = false;
           updateStorage({ step: nextStep(step) });
+        } else if (hostname.includes("login")) {
+          loginTimeout = setTimeout(() => {
+            updateStorage({ step: "Error", error: "Stuck on login page. Please log in and try again." });
+          }, 10_000);
         }
       }
       break;
