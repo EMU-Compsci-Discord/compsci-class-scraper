@@ -45,6 +45,11 @@ subscribeToStep(async (step) => {
   switch (step) {
     case "Waiting for user to start": {
       await gui.waitForStartButton();
+      updateStorage({ step: nextStep(step) });
+      break;
+    }
+
+    case "Navigating to Registration": {
       await chrome.tabs.update(tabId, { url: BANNER_REGISTRATION_URL });
       let loading = true;
       while (loading) {

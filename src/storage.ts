@@ -1,5 +1,6 @@
 export const steps = [
   "Waiting for user to start",
+  "Navigating to Registration",
   "Clicking 'Look-up Classes'",
   "Collecting terms",
   "Waiting for user to select term",
