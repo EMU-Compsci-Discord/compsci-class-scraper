@@ -8,6 +8,12 @@ export default defineConfig({
   build: {
     polyfillModulePreload: false,
     target: "esnext",
+    rollupOptions: {
+      output: {
+        assetFileNames: "assets/[name][extname]",
+        chunkFileNames: "assets/[name].js",
+      },
+    },
   },
   plugins: [
     crx({
