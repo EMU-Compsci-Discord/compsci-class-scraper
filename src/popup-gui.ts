@@ -28,7 +28,7 @@ export class PopupGuiElement extends LitElement {
   @state()
   term = "";
   handleTermSelectInput(event: InputEvent) {
-    const target = event.target as HTMLInputElement;
+    const target = event.target as HTMLSelectElement;
     this.term = target.value;
   }
 
