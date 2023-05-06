@@ -18,7 +18,7 @@ export class PopupGuiElement extends LitElement {
       this.startButtonResolver = resolve;
     });
   }
-  handelStartButtonClick() {
+  handleStartButtonClick() {
     this.startButtonResolver?.();
     this.startButtonResolver = undefined;
   }
@@ -68,7 +68,7 @@ export class PopupGuiElement extends LitElement {
       </div>
       <div class="buttons">
         ${this.startButtonResolver != undefined
-          ? html`<button @click="${this.handelStartButtonClick}">Start</button>`
+          ? html`<button @click="${this.handleStartButtonClick}">Start</button>`
           : undefined}
         ${this.termSelectionResolver != undefined
           ? html`<button @click="${this.handleNextButtonClick}">Next</button>`
