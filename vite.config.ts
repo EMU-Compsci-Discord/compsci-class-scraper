@@ -6,7 +6,7 @@ import { version } from "./package.json";
 
 export default defineConfig({
   build: {
-    polyfillModulePreload: false,
+    modulePreload: false,
     target: "esnext",
     rollupOptions: {
       output: {
