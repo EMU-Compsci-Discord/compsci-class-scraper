@@ -47,19 +47,24 @@ export function getStorage() {
 }
 
 export function subscribeToStep(callback: (state: Step) => void): () => void {
-  const listener = async (
+  type StorageChangedEventListener = (
     changes: {
       [key in keyof StorageState]: { newValue?: StorageState[key] };
     },
     areaName: "sync" | "local" | "managed" | "session"
-  ) => {
+  ) => void;
+
+  type StorageChangedEventSource = chrome.events.Event<StorageChangedEventListener>;
+
+  const listener: StorageChangedEventListener = (changes, areaName) => {
     if (areaName === "local" && changes.step?.newValue !== undefined) {
       callback(changes.step?.newValue);
     }
   };
-  chrome.storage.onChanged.addListener(listener as any);
+
+  (chrome.storage.onChanged as StorageChangedEventSource).addListener(listener);
   return () => {
-    chrome.storage.onChanged.removeListener(listener as any);
+    (chrome.storage.onChanged as StorageChangedEventSource).removeListener(listener);
   };
 }
 
