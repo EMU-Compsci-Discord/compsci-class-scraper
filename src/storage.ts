@@ -51,7 +51,7 @@ export function subscribeToStep(callback: (state: Step) => void): () => void {
     changes: {
       [key in keyof StorageState]: { newValue?: StorageState[key] };
     },
-    areaName: "sync" | "local" | "managed" | "session"
+    areaName: "sync" | "local" | "managed" | "session",
   ) => void;
 
   type StorageChangedEventSource = chrome.events.Event<StorageChangedEventListener>;
