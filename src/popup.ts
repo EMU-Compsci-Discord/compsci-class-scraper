@@ -57,8 +57,13 @@ subscribeToStep(async (step) => {
         await waitForTabToLoad();
         clearTimeout(loginTimeout);
         const tab = await getCurrentTab();
-        const hostname = new URL(tab.url!).hostname;
-        if (hostname === "bannerweb.oci.emich.edu") {
+        const { hostname, pathname } = new URL(tab.url!);
+        if (pathname == "/ssomanager/ui/error.jsp") {
+          updateStorage({
+            step: "Error",
+            error: "An SSO error ocurred! This may be because you no-longer have access to the student portal.",
+          });
+        } else if (hostname === "bannerweb.oci.emich.edu") {
           loading = false;
           updateStorage({ step: nextStep(step) });
         } else if (hostname.includes("login")) {
