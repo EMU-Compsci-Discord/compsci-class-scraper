@@ -75,6 +75,10 @@ select {
   justify-items: end;
 }
 
+.buttons:not(:has(> *)) {
+  display: none;
+}
+
 button {
   appearance: none;
   border: none;
