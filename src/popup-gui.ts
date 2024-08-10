@@ -1,7 +1,7 @@
 import "./popup.css";
 import { html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { Step } from "./storage";
+import type { Step } from "./storage";
 
 @customElement("popup-gui")
 export class PopupGuiElement extends LitElement {
